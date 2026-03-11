@@ -1,6 +1,29 @@
 {
-  "name": "launchpad-next",
+  "name": "launchpad-commerce",
   "version": "0.1.0",
+  "description": "A production-ready e-commerce platform built with Next.js, Stripe, and PostgreSQL. Portfolio project demonstrating full-stack development expertise.",
+  "author": {
+    "name": "Luiz Spinelli",
+    "url": "https://spinelli.dev.br"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luizspinelli/launchpad-commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luizspinelli/launchpad-commerce/issues"
+  },
+  "homepage": "https://launchpad-commerce-roan.vercel.app",
+  "keywords": [
+    "e-commerce",
+    "next.js",
+    "stripe",
+    "postgresql",
+    "typescript",
+    "full-stack",
+    "portfolio"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",

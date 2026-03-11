@@ -1,4 +1,7 @@
 /**
+ * LaunchPad Commerce - Stripe Webhook Handler
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
  * POST /api/stripe/webhook
  * Stripe webhook handler for payment events
  *

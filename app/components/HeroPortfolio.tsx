@@ -1,6 +1,8 @@
 /**
- * HeroPortfolio Component
- * Portfolio-focused hero section for LaunchPad Commerce
+ * LaunchPad Commerce - Hero Component
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Portfolio-focused hero section with project overview and CTAs
  */
 
 import Link from 'next/link';

@@ -1,6 +1,8 @@
 /**
- * FeaturesPortfolio Component
- * Technical features showcase
+ * LaunchPad Commerce - Features Component
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Technical features showcase section
  */
 
 export default function FeaturesPortfolio() {

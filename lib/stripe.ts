@@ -1,5 +1,8 @@
 /**
- * Stripe Client Configuration
+ * LaunchPad Commerce - Stripe Client Configuration
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Stripe initialization and payment processing helpers
  */
 
 import Stripe from 'stripe';

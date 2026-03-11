@@ -1,3 +1,10 @@
+/**
+ * LaunchPad Commerce - Cart State Management
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Zustand-based shopping cart state with localStorage persistence
+ */
+
 import { create } from 'zustand';
 import { Product } from './types';
 

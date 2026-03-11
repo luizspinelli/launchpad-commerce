@@ -1,3 +1,11 @@
+/**
+ * LaunchPad Commerce - Landing Page
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Main entry point for the application
+ * Displays portfolio-focused landing page with project showcase
+ */
+
 import Navbar from './components/Navbar';
 import HeroPortfolio from './components/HeroPortfolio';
 import FeaturesPortfolio from './components/FeaturesPortfolio';

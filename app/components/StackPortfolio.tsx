@@ -1,6 +1,8 @@
 /**
- * StackPortfolio Component
- * Technology stack showcase
+ * LaunchPad Commerce - Stack Component
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Technology stack and architecture showcase
  */
 
 export default function StackPortfolio() {

@@ -1,5 +1,8 @@
 /**
- * Resend Email Service Client
+ * LaunchPad Commerce - Email Service
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
+ * Transactional email handling via Resend
  */
 
 import { Resend } from 'resend';

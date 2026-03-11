@@ -1,4 +1,7 @@
 /**
+ * LaunchPad Commerce - Stripe Checkout API
+ * MIT License - Copyright (c) 2026 Luiz Spinelli
+ * 
  * POST /api/stripe/checkout
  * Create Stripe checkout session
  *
