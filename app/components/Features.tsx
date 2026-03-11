@@ -8,23 +8,23 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    title: 'Easy Setup',
-    description: 'No technical knowledge required. Create and launch in minutes with our intuitive drag-and-drop builder.',
+    title: 'Configuração Fácil',
+    description: 'Nenhum conhecimento técnico necessário. Crie e lance em minutos com nosso construtor intuitivo.',
     icon: '⚡',
   },
   {
-    title: 'Secure Payments',
-    description: 'Stripe integration with PCI Level 1 compliance. All payment processing is fully secured and reliable.',
+    title: 'Pagamentos Seguros',
+    description: 'Integração com Stripe e conformidade PCI Nível 1. Todos os pagamentos totalmente seguro e confiável.',
     icon: '🔒',
   },
   {
-    title: 'Email Automation',
-    description: 'Resend integration for automatic order confirmations and delivery. Keep your customers informed instantly.',
+    title: 'Automação de Email',
+    description: 'Integração com Resend para confirmações automáticas. Mantenha seus clientes informados al instante.',
     icon: '📧',
   },
   {
-    title: 'Beautiful Design',
-    description: 'Responsive, modern, and professional. Your landing page looks amazing on every device.',
+    title: 'Design Bonito',
+    description: 'Responsivo, moderno e profissional. Sua landing page fica perfeita em qualquer dispositivo.',
     icon: '🎨',
   },
 ];
@@ -36,10 +36,10 @@ export default function Features() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Everything You Need to Succeed
+            Tudo o Que Você Precisa para Suceder
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Powerful features built for creators who want to launch without the complexity.
+            Recursos poderosos criados para criadores que querem lançar sem complicações.
           </p>
         </div>
 

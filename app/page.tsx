@@ -6,21 +6,21 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 
 export const metadata = {
-  title: 'LaunchPad Commerce - Create & Sell Digital Products in Minutes',
+  title: 'LaunchPad Commerce - Crie e Venda Produtos Digitais em Minutos',
   description:
-    'No coding needed. Launch a beautiful storefront with secure Stripe payments and automatic email delivery. Start selling digital products today.',
+    'Sem código. Lance uma loja bonita com pagamentos seguros no Stripe e entrega automática por email. Comece a vender produtos digitais hoje.',
   keywords: [
-    'digital products',
-    'online course platform',
-    'ebook seller',
-    'stripe integration',
-    'no-code commerce',
+    'produtos digitais',
+    'plataforma de cursos',
+    'venda de ebooks',
+    'integração stripe',
+    'ecommerce sem código',
   ],
   authors: [{ name: 'LaunchPad Commerce' }],
   creator: 'LaunchPad Commerce',
   openGraph: {
-    title: 'LaunchPad Commerce - Create & Sell Digital Products',
-    description: 'Launch your digital business in minutes. No coding required.',
+    title: 'LaunchPad Commerce - Crie e Venda Produtos Digitais',
+    description: 'Lance seu negócio digital em minutos. Sem código necessário.',
     type: 'website',
     images: [
       {
@@ -34,7 +34,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'LaunchPad Commerce',
-    description: 'Create & sell digital products in minutes',
+    description: 'Crie e venda produtos digitais em minutos',
   },
 };
 

@@ -10,21 +10,21 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote: 'Launched my first course in 2 hours. Stripe integration was seamless. This tool is a game-changer.',
+    quote: 'Lancei meu primeiro curso em 2 horas. A integração com Stripe foi perfeita. Essa ferramenta muda o jogo.',
     author: 'Maria',
-    role: 'Course Creator',
+    role: 'Criadora de Cursos',
     initials: 'M',
     color: 'bg-blue-500',
   },
   {
-    quote: 'Finally, a tool for non-technical creators. Highly recommend to anyone looking to sell digital products.',
+    quote: 'Finalmente uma ferramenta para criadores não-técnicos. Recomendo muito para qualquer pessoa que queira vender produtos digitais.',
     author: 'João',
-    role: 'Ebook Author',
+    role: 'Autor de Ebooks',
     initials: 'J',
     color: 'bg-emerald-500',
   },
   {
-    quote: 'Beautiful design, zero headaches. Worth every penny. Best investment for my business.',
+    quote: 'Design bonito, sem dores de cabeça. Vale cada centavo. Melhor investimento para meu negócio.',
     author: 'Ana',
     role: 'Designer',
     initials: 'A',
@@ -39,10 +39,10 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Loved by Creators Worldwide
+            Amado por Criadores em Todo o Mundo
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            See what our customers are saying about LaunchPad Commerce.
+            Veja o que nossos clientes estão dizendo sobre LaunchPad Commerce.
           </p>
         </div>
 

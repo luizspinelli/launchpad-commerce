@@ -9,28 +9,28 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'Do I need coding knowledge?',
-    answer: "No, it's designed for non-developers. Our drag-and-drop builder makes it easy to create a professional landing page without writing any code.",
+    question: 'Preciso de conhecimento em código?',
+    answer: 'Não, é projetado para não-desenvolvedores. Nosso construtor tipo arrastar-e-soltar torna fácil criar uma landing page profissional sem escrever código.',
   },
   {
-    question: 'Is it secure?',
-    answer: 'Yes, Stripe handles all payment security with PCI Level 1 compliance. Your customers\' data is protected with industry-leading encryption.',
+    question: 'É seguro?',
+    answer: 'Sim, Stripe trata toda a segurança de pagamento com conformidade PCI Nível 1. Os dados dos seus clientes são protegidos com encriptação de nível industrial.',
   },
   {
-    question: 'Can I customize the design?',
-    answer: 'Yes, full TailwindCSS customization is available. You can change colors, fonts, and layouts to match your brand perfectly.',
+    question: 'Posso personalizar o design?',
+    answer: 'Sim, personalização completa com TailwindCSS está disponível. Você pode alterar cores, fontes e layouts para combinar perfeitamente com sua marca.',
   },
   {
-    question: 'What payment methods are supported?',
-    answer: 'All major credit cards, Apple Pay, Google Pay, and other payment methods supported by Stripe. Your customers have flexibility in how they pay.',
+    question: 'Quais métodos de pagamento são suportados?',
+    answer: 'Todos os cartões de crédito principais, Apple Pay, Google Pay e outros métodos de pagamento suportados pelo Stripe. Seus clientes têm flexibilidade em como pagam.',
   },
   {
-    question: 'How do I send digital products?',
-    answer: 'Automatic email delivery after purchase. Once a customer completes their payment, your digital product is immediately sent to their email address.',
+    question: 'Como envio produtos digitais?',
+    answer: 'Entrega automática por email após a compra. Assim que um cliente completa o pagamento, seu produto digital é imediatamente enviado para o email dele.',
   },
   {
-    question: 'Can I track sales?',
-    answer: 'Yes, built-in analytics dashboard shows all your sales, customer data, and revenue metrics in real-time.',
+    question: 'Posso rastrear vendas?',
+    answer: 'Sim, o painel de análise integrado mostra todas as suas vendas, dados dos clientes e métricas de receita em tempo real.',
   },
 ];
 
@@ -47,10 +47,10 @@ export default function FAQ() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Frequently Asked Questions
+            Perguntas Frequentes
           </h2>
           <p className="text-lg text-gray-600">
-            Everything you need to know about LaunchPad Commerce.
+            Tudo o que você precisa saber sobre LaunchPad Commerce.
           </p>
         </div>
 
@@ -90,10 +90,10 @@ export default function FAQ() {
         {/* CTA */}
         <div className="text-center mt-16">
           <p className="text-gray-600 mb-6">
-            Still have questions? We're here to help.
+            Ainda tem dúvidas? Estamos aqui para ajudar.
           </p>
           <button className="px-8 py-4 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-blue-700 transition-colors">
-            Contact Support
+            Entrar em Contato
           </button>
         </div>
       </div>

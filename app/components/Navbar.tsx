@@ -12,7 +12,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <button className="px-6 py-2 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors">
-            Get Started Free
+            Começar Grátis
           </button>
         </div>
       </div>

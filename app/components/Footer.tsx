@@ -12,22 +12,22 @@ export default function Footer() {
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">LaunchPad</h3>
             <p className="text-blue-100 text-sm leading-relaxed">
-              The easiest way to create and sell digital products. Launch your business in minutes.
+              A maneira mais fácil de criar e vender produtos digitais. Lance seu negócio em minutos.
             </p>
           </div>
 
           {/* Product Links */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Product</h4>
+            <h4 className="font-semibold text-white mb-4">Produto</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Features
+                  Recursos
                 </a>
               </li>
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Pricing
+                  Preços
                 </a>
               </li>
               <li>
@@ -37,7 +37,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Security
+                  Segurança
                 </a>
               </li>
             </ul>
@@ -45,11 +45,11 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Company</h4>
+            <h4 className="font-semibold text-white mb-4">Empresa</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  About
+                  Sobre
                 </a>
               </li>
               <li>
@@ -59,12 +59,12 @@ export default function Footer() {
               </li>
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Contact
+                  Contato
                 </a>
               </li>
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Careers
+                  Carreiras
                 </a>
               </li>
             </ul>
@@ -76,17 +76,17 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Privacy Policy
+                  Política de Privacidade
                 </a>
               </li>
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Terms of Service
+                  Termos de Serviço
                 </a>
               </li>
               <li>
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Cookie Policy
+                  Política de Cookies
                 </a>
               </li>
             </ul>
@@ -100,7 +100,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Copyright */}
           <p className="text-sm text-blue-100">
-            © {currentYear} LaunchPad Commerce. All rights reserved.
+            © {currentYear} LaunchPad Commerce. Todos os direitos reservados.
           </p>
 
           {/* Social Links */}
@@ -131,7 +131,7 @@ export default function Footer() {
 
         {/* Trust Badge */}
         <div className="mt-8 text-center text-blue-200 text-xs">
-          🔒 Secured by Stripe | Emails by Resend
+          🔒 Seguro com Stripe | Emails com Resend
         </div>
       </div>
     </footer>
