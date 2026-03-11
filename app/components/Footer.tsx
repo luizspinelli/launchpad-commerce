@@ -80,16 +80,7 @@ export default function Footer() {
                   <span>🐙</span> GitHub
                 </a>
               </li>
-              <li>
-                <a 
-                  href="https://twitter.com/luizspinelli" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <span>𝕏</span> Twitter
-                </a>
-              </li>
+
               <li>
                 <a 
                   href="https://linkedin.com/in/luizspinelli" 

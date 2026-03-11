@@ -36,10 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </p>
           </div>
 
-          {/* CTA Button */}
-          <button className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm md:text-base">
-            Ver Detalhes
-          </button>
+  
         </div>
       </div>
     </Link>
