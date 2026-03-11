@@ -1,9 +1,9 @@
 # 🗄️ Database Schema — LaunchPad Commerce
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Date:** March 11, 2026  
 **ORM:** Prisma  
-**Database:** SQLite (MVP) → PostgreSQL (production)
+**Database:** PostgreSQL (Vercel Postgres)
 
 ---
 
@@ -32,7 +32,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"  // Change to "postgresql" for prod
+  provider = "postgresql"  // PostgreSQL only (Vercel Postgres)
   url      = env("DATABASE_URL")
 }
 

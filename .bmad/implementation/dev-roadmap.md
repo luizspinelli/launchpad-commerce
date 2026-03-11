@@ -136,10 +136,10 @@ Hard Launch:         Mar 30 (public)
   npm install @prisma/client
   npx prisma init
   ```
-- [ ] **[1h]** Configure SQLite (MVP)
+- [ ] **[1h]** Configure PostgreSQL (Vercel Postgres)
   ```
-  # .env.local
-  DATABASE_URL="file:./dev.db"
+  # Production: Vercel provides DATABASE_URL
+  # Local: Leave empty (schema compatible with PostgreSQL)
   ```
 - [ ] **[1h]** Create Prisma schema (copy from docs)
   ```bash
@@ -337,11 +337,11 @@ Status: Ready for backend completion & deployment
   - Resend API key
   - Database URL (PostgreSQL if upgraded)
   - Admin password
-- [ ] **[2h]** Create PostgreSQL database (upgrade from SQLite)
-  - Use Neon (free tier)
-  - Update `DATABASE_URL`
-  - Run migrations on new database
-  - Verify data integrity
+- [ ] **[2h]** Setup PostgreSQL on Vercel (production)
+  - Vercel automatically provides Vercel Postgres
+  - Set DATABASE_URL environment variable
+  - Migration runs automatically on first deploy
+  - Verify data integrity in production
 - [ ] **[2h]** Final testing on production
   - Test checkout with Stripe live/test
   - Check email delivery
