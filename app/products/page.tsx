@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Navbar from '@/app/components/Navbar';
 import ProductCard from '@/app/components/ProductCard';
 import { Product } from '@/lib/types';
 
@@ -39,7 +40,9 @@ export default function ProductsPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-8">Nossos Produtos</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -49,33 +52,42 @@ export default function ProductsPage() {
           </div>
         </div>
       </main>
+      </>
     );
   }
 
   if (error) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold mb-8">Nossos Produtos</h1>
           <p className="text-red-600 text-lg">{error}</p>
         </div>
       </main>
+      </>
     );
   }
 
   if (products.length === 0) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold mb-8">Nossos Produtos</h1>
           <p className="text-gray-600 text-lg">Nenhum produto disponível no momento.</p>
         </div>
       </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white py-12">
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
@@ -93,5 +105,6 @@ export default function ProductsPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }

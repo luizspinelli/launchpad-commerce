@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Navbar from '@/app/components/Navbar';
 import { Product } from '@/lib/types';
 import AddToCartButton from '@/app/components/AddToCartButton';
 
@@ -52,7 +53,9 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-4xl mx-auto px-4">
           <div className="animate-pulse">
             <div className="h-96 bg-gray-200 rounded-lg mb-8" />
@@ -66,12 +69,15 @@ export default function ProductPage({ params }: ProductPageProps) {
           </div>
         </div>
       </main>
+      </>
     );
   }
 
   if (error || !product) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-red-600 text-lg mb-6">{error || 'Produto não encontrado'}</p>
           <Link href="/products" className="text-blue-600 hover:underline font-semibold">
@@ -79,11 +85,14 @@ export default function ProductPage({ params }: ProductPageProps) {
           </Link>
         </div>
       </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white py-12">
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-white py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Link */}
         <Link href="/products" className="text-blue-600 hover:underline font-semibold mb-8 block">
@@ -155,5 +164,6 @@ export default function ProductPage({ params }: ProductPageProps) {
         </div>
       </div>
     </main>
+    </>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import Navbar from '@/app/components/Navbar';
 import OrderDownloadSection from '@/app/components/OrderDownloadSection';
 
 interface OrderPageProps {
@@ -75,18 +76,23 @@ export default function OrderPage({ params }: OrderPageProps) {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white py-12 flex items-center justify-center">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           <p className="mt-4 text-gray-600">Carregando seu pedido...</p>
         </div>
       </main>
+      </>
     );
   }
 
   if (error || !order) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <div className="text-6xl mb-4">❌</div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Erro ao Processar Pedido</h1>
@@ -99,11 +105,14 @@ export default function OrderPage({ params }: OrderPageProps) {
           </Link>
         </div>
       </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white py-12">
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-white py-12">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Success Card */}
         <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border-2 border-green-200 p-8 text-center mb-8">
@@ -212,5 +221,6 @@ export default function OrderPage({ params }: OrderPageProps) {
         </div>
       </div>
     </main>
+    </>
   );
 }

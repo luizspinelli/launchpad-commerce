@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Navbar from '@/app/components/Navbar';
 import { useCart } from '@/lib/store';
 import CheckoutForm from '@/app/components/CheckoutForm';
 
@@ -15,7 +16,9 @@ export default function CheckoutPage() {
   // Redirect if cart is empty
   if (items.length === 0) {
     return (
-      <main className="min-h-screen bg-white py-12">
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold mb-6">Carrinho Vazio</h1>
           <p className="text-gray-600 mb-6">Você não tem produtos no carrinho.</p>
@@ -27,11 +30,14 @@ export default function CheckoutPage() {
           </Link>
         </div>
       </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white py-12">
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-white py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
@@ -99,5 +105,6 @@ export default function CheckoutPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }
