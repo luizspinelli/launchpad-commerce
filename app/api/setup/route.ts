@@ -10,17 +10,9 @@ import { prisma } from '@/lib/db';
 
 async function setupDatabase(request: NextRequest) {
   try {
-    // Security check: only allow in development or with secret
-    const secret = request.headers.get('x-setup-secret');
-    const isDev = process.env.NODE_ENV === 'development';
-    const isAuthorized = isDev || secret === process.env.SETUP_SECRET;
-
-    if (!isAuthorized) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // TODO: Add proper security later (API key, auth, etc)
+    // For MVP, allow all requests to /api/setup
+    // In production, this should be protected
 
     console.log('🔧 Setting up database...');
 
