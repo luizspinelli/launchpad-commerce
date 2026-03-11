@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
+    "seed": "tsx prisma/seed.ts",
     "postinstall": "prisma generate && prisma migrate deploy"
   },
   "dependencies": {
