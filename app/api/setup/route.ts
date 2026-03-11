@@ -142,18 +142,30 @@ async function setupDatabase(request: NextRequest) {
       },
     ];
 
-    // Insert products
-    const created = await prisma.product.createMany({
-      data: products,
-    });
+    // Insert products with proper field names
+    const createdProducts = [];
+    for (const product of products) {
+      const created = await prisma.product.create({
+        data: {
+          slug: product.slug,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          image: product.image,
+          category: product.category || null,
+          featured: product.featured || false,
+        },
+      });
+      createdProducts.push(created);
+    }
 
-    console.log(`✅ ${created.count} products seeded`);
+    console.log(`✅ ${createdProducts.length} products seeded`);
 
     return NextResponse.json(
       {
         success: true,
-        message: `Seeded ${created.count} products`,
-        count: created.count,
+        message: `Seeded ${createdProducts.length} products`,
+        count: createdProducts.length,
       },
       { status: 200 }
     );

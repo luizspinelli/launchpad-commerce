@@ -17,6 +17,8 @@ model Product {
   description String
   price     Int      // Price in cents (e.g., 1999 = R$19.99)
   image     String
+  category  String?
+  featured  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

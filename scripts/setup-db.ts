@@ -21,14 +21,14 @@ async function main() {
       console.log('📝 Creating tables...');
       await prisma.$executeRaw`
         CREATE TABLE "Product" (
-          "id" TEXT NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+          "id" TEXT NOT NULL PRIMARY KEY,
           "slug" TEXT NOT NULL UNIQUE,
           "name" TEXT NOT NULL,
           "description" TEXT NOT NULL,
           "price" INTEGER NOT NULL,
           "image" TEXT NOT NULL,
           "category" TEXT,
-          "featured" BOOLEAN DEFAULT false,
+          "featured" BOOLEAN NOT NULL DEFAULT false,
           "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
@@ -142,7 +142,17 @@ async function main() {
       ];
 
       for (const product of products) {
-        await prisma.product.create({ data: product });
+        await prisma.product.create({
+          data: {
+            slug: product.slug,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            image: product.image,
+            category: product.category || null,
+            featured: product.featured || false,
+          },
+        });
       }
 
       console.log(`✅ ${products.length} products seeded!`);
