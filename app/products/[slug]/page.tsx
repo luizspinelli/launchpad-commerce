@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
+import AddToCartButton from '@/app/components/AddToCartButton';
 
 interface ProductPageProps {
   params: {
@@ -126,14 +127,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             )}
 
             {/* Add to Cart Button */}
-            <button
-              onClick={() => {
-                alert('✅ Adicionado ao carrinho!');
-              }}
-              className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors mb-4"
-            >
-              Adicionar ao Carrinho
-            </button>
+            <AddToCartButton product={product} />
 
             {/* Checkout Button (placeholder) */}
             <button className="w-full border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors">
