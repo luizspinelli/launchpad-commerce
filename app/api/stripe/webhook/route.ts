@@ -57,24 +57,59 @@ export async function POST(request: NextRequest) {
       const session = event.data.object as any;
 
       try {
-        // Create Order in database
+        // Parse items from metadata
+        let orderItems: Array<{ productId: string; quantity: number; price: number }> = [];
+        if (session.metadata?.itemsJson) {
+          try {
+            orderItems = JSON.parse(session.metadata.itemsJson);
+          } catch (e) {
+            console.warn('⚠️  Failed to parse itemsJson from metadata:', e);
+          }
+        }
+
+        // Create Order with OrderItems
         const order = await prisma.order.create({
           data: {
             stripeSessionId: session.id,
             customerEmail: session.customer_email || '',
             totalAmount: session.amount_total || 0,
             status: 'PAID',
+            items: {
+              create: orderItems.map((item) => ({
+                productId: item.productId,
+                quantity: item.quantity,
+                priceAtTime: item.price,
+              })),
+            },
+          },
+          include: {
+            items: true,
           },
         });
 
-        console.log(`✅ Order created: ${order.id}`);
+        console.log(`✅ Order created: ${order.id} with ${order.items.length} items`);
 
-        // Send confirmation email
+        // Send confirmation email with download links
         try {
+          // Fetch products with download links
+          const productIds = orderItems.map((item) => item.productId);
+          const products = await prisma.product.findMany({
+            where: { id: { in: productIds } },
+            select: { name: true, fileUrl: true },
+          });
+
+          const downloadLinks = products
+            .filter((p) => p.fileUrl)
+            .map((p) => ({
+              name: p.name,
+              url: p.fileUrl!,
+            }));
+
           await sendOrderConfirmation(
             session.customer_email,
             order.id,
-            session.amount_total
+            session.amount_total,
+            downloadLinks.length > 0 ? downloadLinks : undefined
           );
           console.log(`📧 Confirmation email sent to ${session.customer_email}`);
         } catch (emailErr) {

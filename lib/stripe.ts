@@ -31,6 +31,7 @@ export async function createCheckoutSession(params: {
   }>;
   customerEmail: string;
   customerName: string;
+  metadata?: Record<string, string>;
 }) {
   if (!stripeKey) {
     throw new Error('Stripe not configured');
@@ -60,6 +61,7 @@ export async function createCheckoutSession(params: {
     metadata: {
       customerName: params.customerName,
       itemCount: params.items.length.toString(),
+      ...params.metadata, // Include custom metadata (e.g., itemsJson for webhook)
     },
     success_url: `${baseUrl}/order?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/checkout`,

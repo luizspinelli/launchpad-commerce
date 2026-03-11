@@ -16,9 +16,14 @@ if (!resendKey) {
 export const resend = resendKey ? new Resend(resendKey) : null;
 
 /**
- * Send order confirmation email
+ * Send order confirmation email with download links
  */
-export async function sendOrderConfirmation(email: string, orderId: string, amount: number) {
+export async function sendOrderConfirmation(
+  email: string,
+  orderId: string,
+  amount: number,
+  downloadLinks?: Array<{ name: string; url: string }>
+) {
   if (!resend) {
     console.warn('⚠️  Resend not configured. Email not sent.');
     return { id: 'mock-' + orderId };
@@ -79,6 +84,22 @@ export async function sendOrderConfirmation(email: string, orderId: string, amou
                   <li><strong>Suporte:</strong> Se tiver dúvidas, responda este email ou entre em contato.</li>
                 </ol>
                 
+                ${
+                  downloadLinks && downloadLinks.length > 0
+                    ? `
+                <h2 style="color: #1e3a8a; margin: 30px 0 20px;">📥 Seus Downloads</h2>
+                <div style="background: #f0f9ff; border: 1px solid #0ea5e9; padding: 20px; border-radius: 8px;">
+                  ${downloadLinks
+                    .map(
+                      (link) =>
+                        `<p style="margin: 10px 0;"><a href="${link.url}" style="background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block;">⬇️ Download: ${link.name}</a></p>`
+                    )
+                    .join('')}
+                </div>
+                `
+                    : ''
+                }
+
                 <div style="background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 15px; margin: 20px 0; border-radius: 4px;">
                   <p style="color: #0c4a6e; margin: 0;"><strong>💡 Dica:</strong> Guarde este email em um lugar seguro. Você pode precisar dele para acessar seus produtos novamente.</p>
                 </div>

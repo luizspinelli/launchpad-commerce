@@ -52,11 +52,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create Stripe session
+    // Create Stripe session with metadata containing item IDs for webhook
     const session = await createCheckoutSession({
       items,
       customerEmail,
       customerName,
+      // Metadata will be used in webhook to create OrderItems
+      metadata: {
+        itemsJson: JSON.stringify(
+          items.map((item) => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.price,
+          }))
+        ),
+      },
     });
 
     console.log(`✅ Checkout session created: ${session.id}`);

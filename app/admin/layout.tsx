@@ -6,6 +6,7 @@
  */
 
 import Link from 'next/link';
+import AdminLogoutButton from './components/AdminLogoutButton';
 
 export const metadata = {
   title: 'Admin Dashboard - LaunchPad Commerce',
@@ -67,6 +68,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span>←</span>
             <span>Voltar à loja</span>
           </Link>
+          
+          <AdminLogoutButton />
+          
           <p className="text-xs text-slate-500 px-4 py-2">
             © {new Date().getFullYear()} LaunchPad Commerce
           </p>

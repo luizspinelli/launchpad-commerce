@@ -22,27 +22,44 @@ export default function OrderPage({ params }: OrderPageProps) {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [order, setOrder] = useState<Order | null>(null);
+  const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // For now, show a success message
-    // TODO: Fetch order details from API using sessionId
-    
-    setLoading(false);
-    
-    // Create mock order based on session ID
-    if (sessionId) {
-      setOrder({
-        id: `ORD-${Date.now()}`,
-        customerEmail: 'seu.email@example.com',
-        totalAmount: 12500,
-        status: 'PAID',
-        createdAt: new Date().toISOString(),
-      });
-    } else {
+    if (!sessionId) {
       setError('Sessão não encontrada');
+      setLoading(false);
+      return;
     }
+
+    // Fetch order details using sessionId
+    // In production, you'd query by stripeSessionId
+    // For now, we'll use a placeholder - in real app, needs backend query
+    const fetchOrder = async () => {
+      try {
+        // NOTE: This is a simplified approach
+        // In production, you'd need: GET /api/orders?sessionId={sessionId}
+        // That endpoint would query Order by stripeSessionId
+        
+        setLoading(false);
+        
+        // For demo, show success state
+        setOrder({
+          id: `ORD-${sessionId}`,
+          customerEmail: 'seu.email@example.com',
+          totalAmount: 0,
+          status: 'PAID',
+          createdAt: new Date().toISOString(),
+        });
+      } catch (err) {
+        setError('Erro ao carregar pedido');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrder();
   }, [sessionId]);
 
   if (loading) {
