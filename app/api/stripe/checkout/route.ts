@@ -1,34 +1,90 @@
 /**
  * POST /api/stripe/checkout
  * Create Stripe checkout session
+ *
+ * Request body:
+ * {
+ *   items: Array<{ productId, productName, price, quantity }>,
+ *   customerEmail: string,
+ *   customerName: string
+ * }
+ *
+ * Response:
+ * {
+ *   success: boolean,
+ *   sessionId?: string,
+ *   error?: string
+ * }
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
+import { createCheckoutSession } from '@/lib/stripe';
 import { z } from 'zod';
 
-const CheckoutSchema = z.object({
+const CheckoutRequestSchema = z.object({
   items: z.array(
     z.object({
-      productId: z.string(),
-      quantity: z.number().int().positive(),
-      name: z.string(),
+      productId: z.string().min(1),
+      productName: z.string().min(1),
       price: z.number().int().positive(),
+      quantity: z.number().int().positive(),
     })
   ),
-  email: z.string().email(),
+  customerEmail: z.string().email(),
+  customerName: z.string().min(1),
 });
 
 export async function POST(request: NextRequest) {
   try {
-    // TODO: Implement Stripe checkout
     const body = await request.json();
-    const { items, email } = CheckoutSchema.parse(body);
 
-    // TODO: Create Stripe session
-    return NextResponse.json({ message: 'TODO: Implement checkout' });
+    // Validate request
+    const { items, customerEmail, customerName } = CheckoutRequestSchema.parse(body);
+
+    // Check for empty cart
+    if (items.length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'Carrinho vazio' },
+        { status: 400 }
+      );
+    }
+
+    // Create Stripe session
+    const session = await createCheckoutSession({
+      items,
+      customerEmail,
+      customerName,
+    });
+
+    console.log(`✅ Checkout session created: ${session.id}`);
+
+    return NextResponse.json(
+      {
+        success: true,
+        sessionId: session.id,
+      },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error('Checkout error:', error);
-    return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 });
+    console.error('[POST /api/stripe/checkout] Error:', error);
+
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Dados inválidos',
+          details: error.errors,
+        },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Erro ao criar sessão de checkout',
+      },
+      { status: 500 }
+    );
   }
 }
