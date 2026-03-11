@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  description String
+  price     Int      // Price in cents (e.g., 1999 = R$19.99)
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  orderItems OrderItem[]
+
+  @@index([slug])
+}
+
+model Order {
+  id               String   @id @default(cuid())
+  stripeSessionId  String   @unique
+  customerEmail    String
+  totalAmount      Int      // Amount in cents
+  status           String   @default("pending") // pending, completed, failed
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  items OrderItem[]
+
+  @@index([customerEmail])
+  @@index([status])
+}
+
+model OrderItem {
+  id         String @id @default(cuid())
+  orderId    String
+  productId  String
+  quantity   Int
+  priceAtTime Int    // Price in cents at time of purchase
+
+  // Relations
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model AnalyticsEvent {
+  id           String   @id @default(cuid())
+  eventType    String   // visit, click, add_to_cart, checkout, purchase
+  customerEmail String?
+  productId    String?
+  path         String
+  createdAt    DateTime @default(now())
+
+  @@index([eventType])
+  @@index([createdAt])
+}
