@@ -8,7 +8,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
-export async function POST(request: NextRequest) {
+async function setupDatabase(request: NextRequest) {
   try {
     // Security check: only allow in development or with secret
     const secret = request.headers.get('x-setup-secret');
@@ -167,4 +167,12 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+export async function POST(request: NextRequest) {
+  return setupDatabase(request);
+}
+
+export async function GET(request: NextRequest) {
+  return setupDatabase(request);
 }
