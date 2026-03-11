@@ -17,6 +17,9 @@ model Product {
   description String
   price     Int      // Price in cents (e.g., 1999 = R$19.99)
   image     String
+  fileUrl   String?  // Download file URL (Vercel Blob)
+  filePathname String? // For deletion from Vercel Blob
+  fileSize  Int?     // File size in bytes
   category  String?
   featured  Boolean  @default(false)
   createdAt DateTime @default(now())
