@@ -55,11 +55,12 @@ Este é um **projeto de demonstração técnica** que mostra capacidade de imple
 
 **Stack Tecnológico:**
 - **Frontend:** Next.js 16, React 19, TypeScript, TailwindCSS
-- **Backend:** Node.js, Stripe API, Resend API
+- **Backend:** Node.js, Stripe API, Resend API, Vercel Blob
 - **Database:** PostgreSQL (Vercel Postgres), Prisma ORM
+- **File Storage:** Vercel Blob (digital product downloads, 100MB max)
 - **Deployment:** Vercel (auto-deploy on git push)
-- **State Management:** Zustand
-- **Validation:** Zod
+- **State Management:** Zustand (with localStorage persist)
+- **Validation:** Zod (client + server-side)
 
 ## 🔗 Links Úteis
 
@@ -354,24 +355,69 @@ git push origin main
 # Vercel faz redeploy automaticamente (~2-3 min)
 ```
 
-## 📈 Métricas
+## 📈 Métricas & Estatísticas
 
+- **Commits:** 33 commits
+- **Linhas de código:** 2700+ LOC
+- **Type coverage:** 100% TypeScript
 - **Build time:** ~30 segundos
 - **Page load:** <1s
-- **Type coverage:** 100%
 - **Lighthouse:** 95+
 - **Database queries:** Otimizadas com Prisma
 
-## 🎯 Próximos Passos (Roadmap)
+## 🔒 Segurança & Resilience
 
-- [ ] Admin dashboard (gerenciar produtos/pedidos)
-- [ ] User authentication (criar contas)
-- [ ] Order history (histórico de pedidos)
-- [ ] Analytics (conversão, funnels)
-- [ ] Affiliate system
-- [ ] Download de produtos digitais
+Este projeto implementa várias features críticas de produção:
+
+### ✅ Persistência (P1)
+- **Cart localStorage:** Carrinho persiste após reload/tab close
+- Automático com Zustand persist middleware
+- Zero data loss entre sessões
+
+### ✅ Idempotência (P4)
+- **Webhook safety:** Verifica se Order já existe antes de criar
+- Retries do Stripe não criam duplicatas
+- Email enviado apenas uma vez
+
+### ✅ Validação (P5 + P6)
+- **Form validation:** Name (min 3 chars), Email (format check)
+- **Product validation:** Verifica se produtos ainda existem no checkout
+- **Input security:** Zod validation em todos endpoints
+- Mensagens de erro claras ao usuário
+
+### ✅ File Storage (Vercel Blob)
+- **Upload seguro:** Max 100MB, formato validado
+- **Download links:** Signed URLs, email-bound access
+- **Global CDN:** Vercel Blob distribui arquivos globalmente
+
+## 🧪 Testing
+
+Veja **[TESTING.md](./TESTING.md)** para guia completo de testes:
+- Step-by-step checkout flow
+- Admin product creation
+- Email verification
+- Download validation
+- Pre-launch checklist
+
+## 🎯 Próximos Passos (Roadmap Phase 2)
+
+### ✅ Implementado (MVP+)
+- ✅ Admin dashboard (gerenciar produtos/pedidos)
+- ✅ Download de produtos digitais (Vercel Blob)
+- ✅ Analytics MVP (KPI cards)
+- ✅ Webhook idempotency (P4)
+- ✅ Form validation (P5)
+- ✅ Cart persistence (P1)
+
+### 📋 Planejado (Phase 2+)
+- [ ] User authentication (criar contas/login)
+- [ ] Order history (histórico por user)
+- [ ] Analytics avançado (conversão, funnels, charts)
+- [ ] Affiliate system (partner links)
+- [ ] Coupon system (código de desconto)
 - [ ] Integração com Zapier
 - [ ] Multi-currency support
+- [ ] Mobile app (React Native)
 
 ## 🤝 Contribuições
 

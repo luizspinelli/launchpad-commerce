@@ -37,15 +37,15 @@ export default function HeroPortfolio() {
           {/* Key Stats */}
           <div className="grid grid-cols-3 gap-4 mb-12 max-w-2xl mx-auto">
             <div className="bg-white/5 backdrop-blur rounded-lg p-4 border border-white/10">
-              <div className="text-2xl font-bold text-blue-400">4</div>
+              <div className="text-2xl font-bold text-blue-400">13+</div>
               <div className="text-sm text-blue-200">Endpoints API</div>
             </div>
             <div className="bg-white/5 backdrop-blur rounded-lg p-4 border border-white/10">
-              <div className="text-2xl font-bold text-blue-400">6</div>
-              <div className="text-sm text-blue-200">Páginas</div>
+              <div className="text-2xl font-bold text-blue-400">16+</div>
+              <div className="text-sm text-blue-200">Páginas & Rotas</div>
             </div>
             <div className="bg-white/5 backdrop-blur rounded-lg p-4 border border-white/10">
-              <div className="text-2xl font-bold text-blue-400">3</div>
+              <div className="text-2xl font-bold text-blue-400">4</div>
               <div className="text-sm text-blue-200">Modelos DB</div>
             </div>
           </div>
