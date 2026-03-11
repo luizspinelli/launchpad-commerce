@@ -1,92 +1,113 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-blue-900 text-blue-50 py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="w-full bg-gradient-to-br from-slate-900 to-slate-800 text-slate-300 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
+          {/* Brand Section */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-4">LaunchPad</h3>
-            <p className="text-blue-100 text-sm leading-relaxed">
-              A maneira mais fácil de criar e vender produtos digitais. Lance seu negócio em minutos.
+            <h3 className="text-2xl font-bold text-white mb-2">LaunchPad</h3>
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              Uma plataforma e-commerce production-ready. Projeto de demonstração de expertise em full-stack development.
+            </p>
+            <p className="text-xs text-slate-500">
+              © {currentYear} Luiz Spinelli
             </p>
           </div>
 
-          {/* Product Links */}
+          {/* Explorar Section */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Produto</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-semibold text-white mb-4">📦 Explorar</h4>
+            <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Recursos
-                </a>
+                <Link href="/" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span>🏠</span> Home
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Preços
-                </a>
+                <Link href="/products" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span>🛍️</span> Produtos
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  FAQ
-                </a>
+                <Link href="/checkout" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span>💳</span> Checkout
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Segurança
+                <a 
+                  href="https://github.com/luizspinelli/launchpad-commerce" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>💻</span> Código
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* Tech Stack Section */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Empresa</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Sobre
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Contato
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Carreiras
-                </a>
-              </li>
+            <h4 className="font-semibold text-white mb-4">🔧 Tech Stack</h4>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li>✓ Next.js 16 + React 19</li>
+              <li>✓ TypeScript 5</li>
+              <li>✓ TailwindCSS 4</li>
+              <li>✓ PostgreSQL + Prisma</li>
+              <li>✓ Stripe + Resend</li>
+              <li>✓ Vercel Deployment</li>
             </ul>
           </div>
 
-          {/* Legal Links */}
+          {/* Contato & Social Section */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-semibold text-white mb-4">🤝 Conecte-se</h4>
+            <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Política de Privacidade
+                <a 
+                  href="https://github.com/luizspinelli" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>🐙</span> GitHub
                 </a>
               </li>
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Termos de Serviço
+                <a 
+                  href="https://twitter.com/luizspinelli" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>𝕏</span> Twitter
                 </a>
               </li>
               <li>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">
-                  Política de Cookies
+                <a 
+                  href="https://linkedin.com/in/luizspinelli" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>in</span> LinkedIn
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://spinelli.dev.br" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>🌐</span> Portfolio
                 </a>
               </li>
             </ul>
@@ -94,44 +115,68 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-blue-800 mb-8" />
+        <div className="border-t border-slate-700 mb-8" />
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* Copyright */}
-          <p className="text-sm text-blue-100">
-            © {currentYear} LaunchPad Commerce. Todos os direitos reservados.
-          </p>
-
-          {/* Social Links */}
-          <div className="flex gap-6">
-            <a
-              href="#"
-              className="text-blue-100 hover:text-white transition-colors"
-              aria-label="Twitter"
+        <div className="space-y-6">
+          {/* Legal Links */}
+          <div className="flex flex-wrap gap-6 justify-center text-sm">
+            <a 
+              href="#" 
+              className="text-slate-400 hover:text-white transition-colors"
             >
-              Twitter
+              Política de Privacidade
             </a>
-            <a
-              href="#"
-              className="text-blue-100 hover:text-white transition-colors"
-              aria-label="LinkedIn"
+            <span className="text-slate-600">|</span>
+            <a 
+              href="#" 
+              className="text-slate-400 hover:text-white transition-colors"
             >
-              LinkedIn
+              Termos de Serviço
             </a>
-            <a
-              href="#"
-              className="text-blue-100 hover:text-white transition-colors"
-              aria-label="GitHub"
+            <span className="text-slate-600">|</span>
+            <a 
+              href="https://github.com/luizspinelli/launchpad-commerce/blob/main/LICENSE" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white transition-colors"
             >
-              GitHub
+              Licença MIT
             </a>
           </div>
-        </div>
 
-        {/* Trust Badge */}
-        <div className="mt-8 text-center text-blue-200 text-xs">
-          🔒 Seguro com Stripe | Emails com Resend
+          {/* Trust Badges */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-xs text-slate-400">
+            <div className="flex items-center gap-2">
+              <span>🔒</span>
+              <span>Seguro com Stripe</span>
+            </div>
+            <span className="hidden sm:inline text-slate-600">•</span>
+            <div className="flex items-center gap-2">
+              <span>📧</span>
+              <span>Emails com Resend</span>
+            </div>
+            <span className="hidden sm:inline text-slate-600">•</span>
+            <div className="flex items-center gap-2">
+              <span>✅</span>
+              <span>Production-Ready</span>
+            </div>
+            <span className="hidden sm:inline text-slate-600">•</span>
+            <div className="flex items-center gap-2">
+              <span>100%</span>
+              <span>TypeScript</span>
+            </div>
+          </div>
+
+          {/* Final Note */}
+          <div className="text-center text-xs text-slate-500 mt-8">
+            <p>
+              LaunchPad Commerce é um <strong>projeto de portfolio</strong> demonstrando expertise em full-stack development.
+            </p>
+            <p className="mt-2">
+              Desenvolvido com Next.js 16, Stripe, PostgreSQL e Vercel.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
