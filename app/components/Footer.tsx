@@ -122,26 +122,12 @@ export default function Footer() {
           {/* Legal Links */}
           <div className="flex flex-wrap gap-6 justify-center text-sm">
             <a 
-              href="#" 
-              className="text-slate-400 hover:text-white transition-colors"
-            >
-              Política de Privacidade
-            </a>
-            <span className="text-slate-600">|</span>
-            <a 
-              href="#" 
-              className="text-slate-400 hover:text-white transition-colors"
-            >
-              Termos de Serviço
-            </a>
-            <span className="text-slate-600">|</span>
-            <a 
               href="https://github.com/luizspinelli/launchpad-commerce/blob/main/LICENSE" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-white transition-colors"
             >
-              Licença MIT
+              📜 Licença MIT
             </a>
           </div>
 
