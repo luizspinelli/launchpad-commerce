@@ -22,6 +22,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { createCheckoutSession } from '@/lib/stripe';
+import { prisma } from '@/lib/db';
 import { z } from 'zod';
 
 const CheckoutRequestSchema = z.object({
@@ -48,6 +49,31 @@ export async function POST(request: NextRequest) {
     if (items.length === 0) {
       return NextResponse.json(
         { success: false, error: 'Carrinho vazio' },
+        { status: 400 }
+      );
+    }
+
+    // Validate that all products still exist in database (P6)
+    const productIds = items.map((item) => item.productId);
+    const existingProducts = await prisma.product.findMany({
+      where: { id: { in: productIds } },
+      select: { id: true },
+    });
+
+    if (existingProducts.length !== productIds.length) {
+      // Some products were deleted
+      const deletedProducts = productIds.filter(
+        (id) => !existingProducts.find((p) => p.id === id)
+      );
+
+      console.warn('⚠️  Some products were deleted:', deletedProducts);
+
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            'Um ou mais produtos no seu carrinho foram removidos. Por favor, revise seu carrinho e tente novamente.',
+        },
         { status: 400 }
       );
     }

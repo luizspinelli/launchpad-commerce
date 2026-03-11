@@ -57,6 +57,17 @@ export async function POST(request: NextRequest) {
       const session = event.data.object as any;
 
       try {
+        // Check if order already exists (idempotency check)
+        // Prevent duplicate orders if webhook is called twice
+        const existingOrder = await prisma.order.findUnique({
+          where: { stripeSessionId: session.id },
+        });
+
+        if (existingOrder) {
+          console.log(`✅ Order already exists: ${existingOrder.id}. Skipping duplicate.`);
+          return NextResponse.json({ ok: true }, { status: 200 });
+        }
+
         // Parse items from metadata
         let orderItems: Array<{ productId: string; quantity: number; price: number }> = [];
         if (session.metadata?.itemsJson) {
@@ -67,7 +78,7 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        // Create Order with OrderItems
+        // Create Order with OrderItems (will not be duplicate due to check above)
         const order = await prisma.order.create({
           data: {
             stripeSessionId: session.id,

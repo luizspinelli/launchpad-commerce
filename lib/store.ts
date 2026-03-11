@@ -2,10 +2,11 @@
  * LaunchPad Commerce - Cart State Management
  * MIT License - Copyright (c) 2026 Luiz Spinelli
  * 
- * Zustand-based shopping cart state with localStorage persistence
+ * Zustand-based shopping cart state with localStorage persistence (P1)
  */
 
 import { create } from 'zustand';
+import { persist, PersistOptions } from 'zustand/middleware';
 import { Product } from './types';
 
 export interface CartItem extends Product {
@@ -22,59 +23,68 @@ interface CartStore {
   getItemCount: () => number;
 }
 
-export const useCart = create<CartStore>((set, get) => ({
-  items: [],
+const persistOptions: PersistOptions<CartStore> = {
+  name: 'launchpad-cart', // localStorage key
+};
 
-  addItem: (product, quantity = 1) =>
-    set((state) => {
-      const existingItem = state.items.find((item) => item.id === product.id);
+export const useCart = create(
+  persist<CartStore>(
+    (set, get) => ({
+      items: [],
 
-      if (existingItem) {
-        // Se o produto já está no carrinho, aumenta quantidade
-        return {
-          items: state.items.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + quantity }
-              : item
-          ),
-        };
-      }
+      addItem: (product, quantity = 1) =>
+        set((state) => {
+          const existingItem = state.items.find((item) => item.id === product.id);
 
-      // Adiciona novo produto ao carrinho
-      return {
-        items: [...state.items, { ...product, quantity }],
-      };
-    }),
+          if (existingItem) {
+            // Se o produto já está no carrinho, aumenta quantidade
+            return {
+              items: state.items.map((item) =>
+                item.id === product.id
+                  ? { ...item, quantity: item.quantity + quantity }
+                  : item
+              ),
+            };
+          }
 
-  removeItem: (productId) =>
-    set((state) => ({
-      items: state.items.filter((item) => item.id !== productId),
-    })),
+          // Adiciona novo produto ao carrinho
+          return {
+            items: [...state.items, { ...product, quantity }],
+          };
+        }),
 
-  updateQuantity: (productId, quantity) =>
-    set((state) => {
-      if (quantity <= 0) {
-        return {
+      removeItem: (productId) =>
+        set((state) => ({
           items: state.items.filter((item) => item.id !== productId),
-        };
-      }
+        })),
 
-      return {
-        items: state.items.map((item) =>
-          item.id === productId ? { ...item, quantity } : item
-        ),
-      };
+      updateQuantity: (productId, quantity) =>
+        set((state) => {
+          if (quantity <= 0) {
+            return {
+              items: state.items.filter((item) => item.id !== productId),
+            };
+          }
+
+          return {
+            items: state.items.map((item) =>
+              item.id === productId ? { ...item, quantity } : item
+            ),
+          };
+        }),
+
+      clearCart: () => set({ items: [] }),
+
+      getTotal: () => {
+        const state = get();
+        return state.items.reduce((total, item) => total + item.price * item.quantity, 0);
+      },
+
+      getItemCount: () => {
+        const state = get();
+        return state.items.reduce((count, item) => count + item.quantity, 0);
+      },
     }),
-
-  clearCart: () => set({ items: [] }),
-
-  getTotal: () => {
-    const state = get();
-    return state.items.reduce((total, item) => total + item.price * item.quantity, 0);
-  },
-
-  getItemCount: () => {
-    const state = get();
-    return state.items.reduce((count, item) => count + item.quantity, 0);
-  },
-}));
+    persistOptions
+  )
+);

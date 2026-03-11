@@ -20,6 +20,10 @@ export default function CheckoutForm({
     name: '',
     email: '',
   });
+  const [fieldErrors, setFieldErrors] = useState<{
+    name?: string;
+    email?: string;
+  }>({});
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
@@ -29,6 +33,39 @@ export default function CheckoutForm({
       ...prev,
       [name]: value,
     }));
+    // Clear field error when user starts typing
+    if (fieldErrors[name as keyof typeof fieldErrors]) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const errors: typeof fieldErrors = {};
+
+    // Validate name
+    if (!formData.name.trim()) {
+      errors.name = 'Nome é obrigatório';
+    } else if (formData.name.trim().length < 3) {
+      errors.name = 'Nome deve ter pelo menos 3 caracteres';
+    }
+
+    // Validate email
+    if (!formData.email.trim()) {
+      errors.email = 'Email é obrigatório';
+    } else if (!isValidEmail(formData.email)) {
+      errors.email = 'Email inválido';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,8 +76,9 @@ export default function CheckoutForm({
       setIsProcessing(true);
 
       // Validate form
-      if (!formData.name || !formData.email) {
-        throw new Error('Por favor, preencha todos os campos');
+      if (!validateForm()) {
+        setIsProcessing(false);
+        return;
       }
 
       // Create checkout session
@@ -119,10 +157,12 @@ export default function CheckoutForm({
           value={formData.name}
           onChange={handleChange}
           disabled={isProcessing}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 disabled:bg-gray-100 ${
+            fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+          }`}
           placeholder="João Silva"
-          required
         />
+        {fieldErrors.name && <p className="text-red-600 text-sm mt-1">{fieldErrors.name}</p>}
       </div>
 
       {/* Email Field */}
@@ -137,10 +177,12 @@ export default function CheckoutForm({
           value={formData.email}
           onChange={handleChange}
           disabled={isProcessing}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 disabled:bg-gray-100 ${
+            fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+          }`}
           placeholder="seu.email@example.com"
-          required
         />
+        {fieldErrors.email && <p className="text-red-600 text-sm mt-1">{fieldErrors.email}</p>}
       </div>
 
       {/* Stripe Info */}
