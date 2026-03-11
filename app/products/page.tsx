@@ -4,11 +4,6 @@ import { useEffect, useState } from 'react';
 import ProductCard from '@/app/components/ProductCard';
 import { Product } from '@/lib/types';
 
-export const metadata = {
-  title: 'Nossos Produtos | LaunchPad Commerce',
-  description: 'Veja todos os nossos produtos digitais e comece a aprender hoje.',
-};
-
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
