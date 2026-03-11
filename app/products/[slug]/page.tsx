@@ -6,9 +6,9 @@ import { Product } from '@/lib/types';
 import AddToCartButton from '@/app/components/AddToCartButton';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
@@ -20,7 +20,8 @@ export default function ProductPage({ params }: ProductPageProps) {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/products/${params.slug}`);
+        const resolvedParams = await params;
+        const response = await fetch(`/api/products/${resolvedParams.slug}`);
 
         if (!response.ok) {
           if (response.status === 404) {
@@ -47,7 +48,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     };
 
     fetchProduct();
-  }, [params.slug]);
+  }, [params]);
 
   if (loading) {
     return (
