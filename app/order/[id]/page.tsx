@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import OrderDownloadSection from '@/app/components/OrderDownloadSection';
 
 interface OrderPageProps {
   params: Promise<{
@@ -10,12 +11,29 @@ interface OrderPageProps {
   }>;
 }
 
+interface OrderItem {
+  productId: string;
+  productName: string;
+  quantity: number;
+  pricePerUnit: number;
+  total: number;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  fileUrl?: string;
+}
+
 interface Order {
   id: string;
+  stripeSessionId: string;
   customerEmail: string;
   totalAmount: number;
   status: string;
   createdAt: string;
+  items: OrderItem[];
+  products: Product[];
 }
 
 export default function OrderPage({ params }: OrderPageProps) {
@@ -34,26 +52,19 @@ export default function OrderPage({ params }: OrderPageProps) {
     }
 
     // Fetch order details using sessionId
-    // In production, you'd query by stripeSessionId
-    // For now, we'll use a placeholder - in real app, needs backend query
     const fetchOrder = async () => {
       try {
-        // NOTE: This is a simplified approach
-        // In production, you'd need: GET /api/orders?sessionId={sessionId}
-        // That endpoint would query Order by stripeSessionId
-        
-        setLoading(false);
-        
-        // For demo, show success state
-        setOrder({
-          id: `ORD-${sessionId}`,
-          customerEmail: 'seu.email@example.com',
-          totalAmount: 0,
-          status: 'PAID',
-          createdAt: new Date().toISOString(),
-        });
+        const response = await fetch(`/api/orders/session?sessionId=${sessionId}`);
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || 'Erro ao carregar pedido');
+        }
+
+        const data: Order = await response.json();
+        setOrder(data);
       } catch (err) {
-        setError('Erro ao carregar pedido');
+        setError(err instanceof Error ? err.message : 'Erro ao carregar pedido');
       } finally {
         setLoading(false);
       }
@@ -181,6 +192,14 @@ export default function OrderPage({ params }: OrderPageProps) {
             </li>
           </ul>
         </div>
+
+        {/* Download Section (P7) */}
+        {order && (
+          <OrderDownloadSection
+            products={order.products}
+            orderEmail={order.customerEmail}
+          />
+        )}
 
         {/* CTA */}
         <div className="text-center">
