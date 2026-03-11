@@ -1,27 +1,30 @@
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
+import HeroPortfolio from './components/HeroPortfolio';
+import FeaturesPortfolio from './components/FeaturesPortfolio';
+import StackPortfolio from './components/StackPortfolio';
 import Footer from './components/Footer';
 
 export const metadata = {
-  title: 'LaunchPad Commerce - Crie e Venda Produtos Digitais em Minutos',
+  title: 'LaunchPad Commerce - Projeto Portfolio | E-commerce com Stripe',
   description:
-    'Sem código. Lance uma loja bonita com pagamentos seguros no Stripe e entrega automática por email. Comece a vender produtos digitais hoje.',
+    'Uma plataforma e-commerce production-ready construída com Next.js, Stripe e PostgreSQL. Demonstra full-stack development, payment processing, e arquitetura escalável.',
   keywords: [
-    'produtos digitais',
-    'plataforma de cursos',
-    'venda de ebooks',
-    'integração stripe',
-    'ecommerce sem código',
+    'portfolio',
+    'e-commerce',
+    'Next.js',
+    'Stripe',
+    'PostgreSQL',
+    'full-stack',
+    'TypeScript',
+    'Node.js',
   ],
-  authors: [{ name: 'LaunchPad Commerce' }],
-  creator: 'LaunchPad Commerce',
+  authors: [{ name: 'Luiz Spinelli' }],
+  creator: 'Luiz Spinelli',
   openGraph: {
-    title: 'LaunchPad Commerce - Crie e Venda Produtos Digitais',
-    description: 'Lance seu negócio digital em minutos. Sem código necessário.',
+    title: 'LaunchPad Commerce - Projeto Portfolio',
+    description: 'Uma plataforma e-commerce completa com Stripe, webhooks, emails e PostgreSQL.',
     type: 'website',
+    url: 'https://launchpad-commerce-roan.vercel.app',
     images: [
       {
         url: '/og-image.png',
@@ -33,8 +36,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LaunchPad Commerce',
-    description: 'Crie e venda produtos digitais em minutos',
+    title: 'LaunchPad Commerce - Projeto Portfolio',
+    description: 'E-commerce production-ready com Next.js, Stripe e PostgreSQL',
   },
 };
 
@@ -42,10 +45,9 @@ export default function Home() {
   return (
     <main className="w-full bg-white">
       <Navbar />
-      <Hero />
-      <Features />
-      <Testimonials />
-      <FAQ />
+      <HeroPortfolio />
+      <FeaturesPortfolio />
+      <StackPortfolio />
       <Footer />
     </main>
   );
