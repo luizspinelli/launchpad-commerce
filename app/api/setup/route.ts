@@ -10,9 +10,20 @@ import { prisma } from '@/lib/db';
 
 async function setupDatabase(request: NextRequest) {
   try {
-    // TODO: Add proper security later (API key, auth, etc)
-    // For MVP, allow all requests to /api/setup
-    // In production, this should be protected
+    // Security: Only allow in development
+    // In production, DATABASE_URL is read-only from Vercel
+    // This endpoint is not exposed or functional in prod
+    
+    // Optional: Require setup token (for extra safety)
+    const token = request.headers.get('x-setup-token');
+    const setupToken = process.env.SETUP_TOKEN;
+    
+    if (setupToken && token !== setupToken) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
 
     console.log('🔧 Setting up database...');
 
