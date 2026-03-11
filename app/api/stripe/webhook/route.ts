@@ -42,8 +42,9 @@ export async function POST(request: NextRequest) {
     let event;
     try {
       event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-    } catch (err: any) {
-      console.error('❌ Webhook signature verification failed:', err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      console.error('❌ Webhook signature verification failed:', errorMessage);
       return NextResponse.json(
         { error: 'Signature verification failed' },
         { status: 400 }
@@ -54,6 +55,7 @@ export async function POST(request: NextRequest) {
 
     // Handle checkout.session.completed (payment succeeded)
     if (event.type === 'checkout.session.completed') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const session = event.data.object as any;
 
       try {
@@ -127,9 +129,10 @@ export async function POST(request: NextRequest) {
           console.error('❌ Email send failed:', emailErr);
           // Don't fail webhook if email fails - order already created
         }
-      } catch (dbErr: any) {
+      } catch (dbErr: unknown) {
         // Check if order already exists (idempotency)
-        if (dbErr.code === 'P2002') {
+        const err = dbErr as { code?: string };
+        if (err.code === 'P2002') {
           console.log('ℹ️  Order already exists (idempotent)');
           return NextResponse.json({ received: true });
         }

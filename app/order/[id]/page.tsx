@@ -37,11 +37,10 @@ interface Order {
   products: Product[];
 }
 
-export default function OrderPage({ params }: OrderPageProps) {
+export default function OrderPage({ params: _params }: OrderPageProps) {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [order, setOrder] = useState<Order | null>(null);
-  const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,8 +63,9 @@ export default function OrderPage({ params }: OrderPageProps) {
 
         const data: Order = await response.json();
         setOrder(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Erro ao carregar pedido');
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Erro ao carregar pedido';
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

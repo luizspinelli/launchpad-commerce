@@ -6,11 +6,6 @@
 
 import Navbar from '@/app/components/Navbar';
 
-export const metadata = {
-  title: 'Thank You | LaunchPad Commerce',
-  description: 'Order confirmation',
-};
-
 export default function ThankYouPage() {
   return (
     <>

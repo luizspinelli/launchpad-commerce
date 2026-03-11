@@ -7,7 +7,7 @@ async function main() {
 
   try {
     // Check if Product table exists
-    const result = await prisma.$queryRaw`
+    const result = await prisma.$queryRaw<Array<{ exists: boolean }>>`
       SELECT EXISTS (
         SELECT 1 FROM information_schema.tables 
         WHERE table_schema = 'public' 
@@ -15,7 +15,7 @@ async function main() {
       );
     `;
 
-    const tableExists = (result as any[])[0]?.exists || false;
+    const tableExists = result[0]?.exists || false;
 
     if (!tableExists) {
       console.log('📝 Creating tables...');
