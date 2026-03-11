@@ -1,5 +1,18 @@
 # LaunchPad Commerce
 
+<div align="center">
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.1.6-black.svg)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://www.typescriptlang.org)
+[![Production Ready](https://img.shields.io/badge/Status-Production%20Ready-green.svg)](https://launchpad-commerce-roan.vercel.app)
+
+**[🚀 Acesse Agora](https://launchpad-commerce-roan.vercel.app)** • **[📖 Documentação](#-estrutura-de-pasta)** • **[💻 GitHub](https://github.com/luizspinelli/launchpad-commerce)**
+
+</div>
+
+---
+
 Uma plataforma e-commerce **production-ready** construída com Next.js, Stripe e PostgreSQL.
 
 Este é um **projeto de demonstração técnica** que mostra capacidade de implementar um sistema completo de vendas com:
@@ -9,6 +22,25 @@ Este é um **projeto de demonstração técnica** que mostra capacidade de imple
 - Emails transacionais
 - Database design com Prisma
 - API REST type-safe
+
+## 🚀 Live Demo
+
+**[Acesse a aplicação ao vivo →](https://launchpad-commerce-roan.vercel.app)**
+
+- **Landing Page:** https://launchpad-commerce-roan.vercel.app
+- **Produtos:** https://launchpad-commerce-roan.vercel.app/products
+- **Checkout:** https://launchpad-commerce-roan.vercel.app/checkout
+- **Código no GitHub:** https://github.com/luizspinelli/launchpad-commerce
+
+## 📊 Status do Projeto
+
+| Item | Status | Link |
+|------|--------|------|
+| **Aplicação** | ✅ Live em Vercel | [launchpad-commerce-roan.vercel.app](https://launchpad-commerce-roan.vercel.app) |
+| **Build** | ✅ Passing (0 errors) | [GitHub Workflow](https://github.com/luizspinelli/launchpad-commerce) |
+| **Type Coverage** | ✅ 100% TypeScript | — |
+| **License** | 📜 MIT | [LICENSE](./LICENSE) |
+| **Last Commit** | 📅 Março 2026 | [Commits](https://github.com/luizspinelli/launchpad-commerce/commits) |
 
 ## 🎯 Visão Geral
 
@@ -28,6 +60,24 @@ Este é um **projeto de demonstração técnica** que mostra capacidade de imple
 - **Deployment:** Vercel (auto-deploy on git push)
 - **State Management:** Zustand
 - **Validation:** Zod
+
+## 🔗 Links Úteis
+
+### Production
+- **Main Site:** [https://launchpad-commerce-roan.vercel.app](https://launchpad-commerce-roan.vercel.app)
+- **Products Listing:** [https://launchpad-commerce-roan.vercel.app/products](https://launchpad-commerce-roan.vercel.app/products)
+- **Checkout:** [https://launchpad-commerce-roan.vercel.app/checkout](https://launchpad-commerce-roan.vercel.app/checkout)
+
+### Development
+- **GitHub Repository:** [github.com/luizspinelli/launchpad-commerce](https://github.com/luizspinelli/launchpad-commerce)
+- **Issue Tracker:** [Issues](https://github.com/luizspinelli/launchpad-commerce/issues)
+- **MIT License:** [LICENSE](./LICENSE)
+
+### Author
+- **Author:** Luiz Spinelli
+- **Portfolio:** [https://spinelli.dev.br](https://spinelli.dev.br)
+- **GitHub:** [github.com/luizspinelli](https://github.com/luizspinelli)
+- **Twitter:** [@luizspinelli](https://twitter.com/luizspinelli)
 
 ## 🚀 Quick Start
 
@@ -186,6 +236,18 @@ launchpad-commerce/
 - ✅ Error logging estruturado
 - ✅ Idempotência no webhook handler
 
+## ⚡ Try It Now (Sem instalação!)
+
+Quer ver o projeto em ação sem fazer setup local?
+
+1. **[Visite o site live →](https://launchpad-commerce-roan.vercel.app)**
+2. Explore os produtos
+3. Adicione ao carrinho
+4. Vá para checkout (Stripe em test mode)
+5. Use test card: `4242 4242 4242 4242` (qualquer data futura e CVC)
+
+> **Nota:** Este é um projeto de demonstração em test mode. Nenhuma cobrança real será feita.
+
 ## 🧪 Testes
 
 ### Testar Localmente
@@ -253,6 +315,14 @@ POST /api/setup
 ```
 
 ## 🚀 Deployment (Vercel)
+
+### ✅ Já Deployado em Vercel!
+
+Este projeto já está deployado e rodando em produção:
+
+**[🌐 https://launchpad-commerce-roan.vercel.app](https://launchpad-commerce-roan.vercel.app)**
+
+Para fazer deploy de sua própria cópia:
 
 ### Passo 1: Conectar GitHub
 1. Acesse [https://vercel.com/new](https://vercel.com/new)
