@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { CartItem } from '@/lib/store';
 
 interface CheckoutFormProps {
@@ -17,7 +16,6 @@ export default function CheckoutForm({
   isProcessing,
   setIsProcessing,
 }: CheckoutFormProps) {
-  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -67,15 +65,15 @@ export default function CheckoutForm({
         throw new Error(data.error || 'Erro ao criar sessão de pagamento');
       }
 
-      // Redirect to Stripe checkout
+      // Redirect to Stripe hosted checkout
       if (data.sessionId) {
-        // For now, just show success message
-        // In production, redirect to Stripe checkout URL
         setSuccess(true);
         console.log('✅ Checkout session created:', data.sessionId);
 
-        // TODO: Redirect to Stripe hosted checkout or use Stripe.js
-        // window.location.href = `https://checkout.stripe.com/pay/${data.sessionId}`;
+        // Redirect to Stripe Checkout in 2 seconds
+        setTimeout(() => {
+          window.location.href = `https://checkout.stripe.com/pay/${data.sessionId}`;
+        }, 2000);
       }
     } catch (err) {
       console.error('Checkout error:', err);
@@ -89,16 +87,11 @@ export default function CheckoutForm({
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
         <div className="text-5xl mb-4">✅</div>
-        <h2 className="text-2xl font-bold text-green-900 mb-2">Sessão de Checkout Criada!</h2>
+        <h2 className="text-2xl font-bold text-green-900 mb-2">Redirecionando para Stripe...</h2>
         <p className="text-green-800 mb-6">
-          Em breve você será redirecionado para completar o pagamento com Stripe.
+          Você será redirecionado em breve para completar o pagamento de forma segura.
         </p>
-        <button
-          onClick={() => window.location.reload()}
-          className="bg-green-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
-        >
-          Voltar
-        </button>
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -150,11 +143,10 @@ export default function CheckoutForm({
         />
       </div>
 
-      {/* Stripe Payment Form Placeholder */}
-      <div className="mb-6 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-        <p className="text-gray-600 font-semibold mb-2">Formulário de Pagamento Stripe</p>
-        <p className="text-sm text-gray-500">
-          Integração Stripe.js será adicionada em T3.5
+      {/* Stripe Info */}
+      <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <p className="text-sm text-blue-900">
+          🔒 Você será redirecionado para o checkout seguro do Stripe para completar o pagamento.
         </p>
       </div>
 
@@ -168,12 +160,12 @@ export default function CheckoutForm({
             : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
         }`}
       >
-        {isProcessing ? '⏳ Processando Pagamento...' : 'Finalizar Compra'}
+        {isProcessing ? '⏳ Processando...' : 'Ir para Stripe Checkout'}
       </button>
 
       {/* Security Info */}
       <p className="text-center text-xs text-gray-500 mt-4">
-        🔒 Seu pagamento é seguro e processado por Stripe
+        🔒 Seu pagamento é 100% seguro e processado por Stripe
       </p>
     </form>
   );

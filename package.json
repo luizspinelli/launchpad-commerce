@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit",
     "seed": "tsx prisma/seed.ts",
     "setup-db": "tsx scripts/setup-db.ts",
-    "postinstall": "prisma generate && npm run setup-db"
+    "postinstall": "prisma generate && npm run setup-db || echo 'Setup DB skipped (may need DATABASE_URL)'"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
