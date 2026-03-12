@@ -42,8 +42,7 @@ export async function POST(request: NextRequest) {
           create: items.map((item: any) => ({
             productId: item.productId,
             quantity: item.quantity,
-            pricePerUnit: item.price,
-            total: item.price * item.quantity,
+            priceAtTime: item.price,
           })),
         },
       },
