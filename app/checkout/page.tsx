@@ -61,17 +61,37 @@ export default function CheckoutPage() {
               <div className="px-6 py-4 space-y-4 max-h-96 overflow-y-auto">
                 {items.map((item) => (
                   <div key={item.id} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
-                    <div className="flex justify-between mb-2">
-                      <p className="font-medium text-gray-900 text-sm lg:text-base leading-tight">
-                        {item.name}
-                      </p>
-                      <p className="font-semibold text-gray-900 text-sm lg:text-base ml-2">
-                        R$ {((item.price * item.quantity) / 100).toFixed(2)}
-                      </p>
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900 text-sm lg:text-base leading-tight">
+                          {item.name}
+                        </p>
+                        <p className="text-xs lg:text-sm text-gray-600 mt-1">
+                          {item.quantity}x • R$ {(item.price / 100).toFixed(2)}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-3 ml-2">
+                        <p className="font-semibold text-gray-900 text-sm lg:text-base whitespace-nowrap">
+                          R$ {((item.price * item.quantity) / 100).toFixed(2)}
+                        </p>
+                        {/* Remove Button */}
+                        <button
+                          type="button"
+                          onClick={() => useCart.getState().removeItem(item.id)}
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded p-1.5 transition-colors"
+                          title="Remover item"
+                          aria-label={`Remover ${item.name}`}
+                        >
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <p className="text-xs lg:text-sm text-gray-600">
-                      {item.quantity}x • R$ {(item.price / 100).toFixed(2)}
-                    </p>
                   </div>
                 ))}
               </div>
