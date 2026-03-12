@@ -48,57 +48,60 @@ export default function CheckoutPage() {
         </div>
 
         {/* Two Column Layout - Responsive */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Cart Summary - Left Column */}
-          <div className="md:col-span-1">
-            <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-20">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Resumo do Pedido</h2>
+          <div className="lg:col-span-1">
+            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden sticky top-20">
+              {/* Header */}
+              <div className="bg-gray-50 border-b border-gray-200 px-6 py-4">
+                <h2 className="text-xl lg:text-2xl font-bold text-gray-900">Resumo do Pedido</h2>
+              </div>
 
               {/* Items */}
-              <div className="space-y-3 mb-6 max-h-96 overflow-y-auto">
+              <div className="px-6 py-4 space-y-4 max-h-96 overflow-y-auto">
                 {items.map((item) => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <div>
-                      <p className="font-semibold text-gray-900">{item.name}</p>
-                      <p className="text-gray-700">Qty: {item.quantity}</p>
+                  <div key={item.id} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+                    <div className="flex justify-between mb-2">
+                      <p className="font-medium text-gray-900 text-sm lg:text-base leading-tight">
+                        {item.name}
+                      </p>
+                      <p className="font-semibold text-gray-900 text-sm lg:text-base ml-2">
+                        R$ {((item.price * item.quantity) / 100).toFixed(2)}
+                      </p>
                     </div>
-                    <p className="font-semibold text-gray-900">
-                      R$ {((item.price * item.quantity) / 100).toFixed(2)}
+                    <p className="text-xs lg:text-sm text-gray-600">
+                      {item.quantity}x • R$ {(item.price / 100).toFixed(2)}
                     </p>
                   </div>
                 ))}
               </div>
 
-              {/* Divider */}
-              <div className="border-t border-gray-200 my-4" />
-
               {/* Breakdown */}
-              <div className="mb-6 space-y-2">
-                <div className="flex justify-between text-gray-700">
-                  <span className="font-medium">Subtotal</span>
-                  <span className="text-gray-900 font-medium">R$ {formattedTotal}</span>
+              <div className="bg-gray-50 border-t border-gray-200 px-6 py-4 space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-700 text-sm font-medium">Subtotal</span>
+                  <span className="text-gray-900 font-semibold">R$ {formattedTotal}</span>
                 </div>
-                <div className="flex justify-between text-gray-700">
-                  <span className="font-medium">Frete</span>
+                <div className="flex justify-between">
+                  <span className="text-gray-700 text-sm font-medium">Frete</span>
                   <span className="text-green-600 font-semibold">Grátis</span>
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="border-t border-gray-300 my-4" />
-
               {/* Grand Total */}
-              <div className="flex justify-between items-center">
-                <span className="text-gray-700 font-semibold">Total</span>
-                <span className="text-2xl font-bold text-gray-900">
-                  R$ {formattedTotal}
-                </span>
+              <div className="bg-blue-50 border-t border-blue-200 px-6 py-5">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-700 font-semibold text-base">Total a Pagar</span>
+                  <span className="text-3xl lg:text-4xl font-bold text-blue-600">
+                    R$ {formattedTotal}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Checkout Form - Right Column */}
-          <div className="md:col-span-2">
+          <div className="lg:col-span-2">
             <CheckoutForm
               items={items}
               total={total}

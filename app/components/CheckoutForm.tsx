@@ -158,7 +158,7 @@ export default function CheckoutForm({
       )}
 
       {/* Name Field */}
-      <div className="mb-4">
+      <div className="mb-5">
         <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
           Nome Completo
         </label>
@@ -169,7 +169,7 @@ export default function CheckoutForm({
           value={formData.name}
           onChange={handleChange}
           disabled={isProcessing}
-          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+          className={`w-full lg:max-w-md px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
             isProcessing
               ? 'bg-gray-100 text-gray-600 cursor-not-allowed border-gray-300'
               : fieldErrors.name
@@ -178,7 +178,7 @@ export default function CheckoutForm({
           }`}
           placeholder="João Silva"
         />
-        {fieldErrors.name && <p className="text-red-600 text-sm mt-1">{fieldErrors.name}</p>}
+        {fieldErrors.name && <p className="text-red-600 text-sm mt-2">{fieldErrors.name}</p>}
       </div>
 
       {/* Email Field */}
@@ -193,7 +193,7 @@ export default function CheckoutForm({
           value={formData.email}
           onChange={handleChange}
           disabled={isProcessing}
-          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+          className={`w-full lg:max-w-md px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
             isProcessing
               ? 'bg-gray-100 text-gray-600 cursor-not-allowed border-gray-300'
               : fieldErrors.email
@@ -202,13 +202,13 @@ export default function CheckoutForm({
           }`}
           placeholder="seu.email@example.com"
         />
-        {fieldErrors.email && <p className="text-red-600 text-sm mt-1">{fieldErrors.email}</p>}
+        {fieldErrors.email && <p className="text-red-600 text-sm mt-2">{fieldErrors.email}</p>}
       </div>
 
       {/* Stripe Redirect Warning */}
       <div className="mb-6 bg-blue-50 border-l-4 border-blue-600 rounded-lg p-4">
-        <p className="text-sm text-blue-900 font-medium">
-          🔒 <strong>Redirecionamento Seguro:</strong> Você será levado para o checkout seguro do Stripe, certificado e protegido.
+        <p className="text-sm text-blue-900">
+          🔒 <strong>Redirecionamento Seguro:</strong> Você será levado para o checkout seguro do Stripe.
         </p>
       </div>
 
@@ -216,10 +216,10 @@ export default function CheckoutForm({
       <button
         type="submit"
         disabled={isProcessing}
-        className={`w-full py-3 px-4 rounded-lg font-bold text-lg text-white transition-all duration-200 ${
+        className={`w-full lg:w-auto lg:px-8 py-3.5 px-6 rounded-lg font-bold text-base lg:text-lg text-white transition-all duration-200 shadow-md hover:shadow-lg ${
           isProcessing
             ? 'bg-gray-400 cursor-not-allowed opacity-75'
-            : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 shadow-md hover:shadow-lg'
+            : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
         }`}
       >
         {isProcessing ? (
@@ -228,14 +228,14 @@ export default function CheckoutForm({
             Processando...
           </>
         ) : (
-          '💳 Ir para Stripe Checkout'
+          '💳 Finalizar Compra'
         )}
       </button>
 
       {/* Security Info */}
-      <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-        <p className="text-center text-xs text-green-800 font-medium">
-          ✅ Seu pagamento é <strong>100% seguro</strong> e processado por Stripe
+      <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+        <p className="text-sm text-green-800 font-medium">
+          ✅ Pagamento <strong>100% seguro</strong> via Stripe
         </p>
       </div>
     </form>
