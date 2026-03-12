@@ -96,6 +96,26 @@ export async function POST(request: NextRequest) {
     });
 
     console.log(`✅ Checkout session created: ${session.id}`);
+    console.log(`📊 Session Details:`, {
+      id: session.id,
+      customer_email: session.customer_email,
+      status: session.status,
+      payment_status: session.payment_status,
+      url: session.url,
+      success_url: session.success_url,
+    });
+
+    // Verify session ID is valid
+    if (!session.id || !session.id.startsWith('cs_test_')) {
+      console.error('❌ INVALID SESSION ID:', session.id);
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Erro ao criar sessão de checkout (ID inválido)',
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {

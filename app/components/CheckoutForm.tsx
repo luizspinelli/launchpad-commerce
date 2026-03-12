@@ -106,12 +106,24 @@ export default function CheckoutForm({
       // Redirect to Stripe hosted checkout
       if (data.sessionId) {
         setSuccess(true);
+        const checkoutUrl = `https://checkout.stripe.com/pay/${data.sessionId}`;
         console.log('✅ Checkout session created:', data.sessionId);
+        console.log('🔗 Redirecting to:', checkoutUrl);
+
+        // Log session ID details for debugging
+        console.log('📊 Session ID Details:', {
+          sessionId: data.sessionId,
+          length: data.sessionId.length,
+          startsWithCsTest: data.sessionId.startsWith('cs_test_'),
+          checkoutUrl: checkoutUrl,
+        });
 
         // Redirect to Stripe Checkout in 2 seconds
         setTimeout(() => {
-          window.location.href = `https://checkout.stripe.com/pay/${data.sessionId}`;
+          window.location.href = checkoutUrl;
         }, 2000);
+      } else {
+        throw new Error('Nenhum ID de sessão retornado do servidor');
       }
     } catch (err) {
       console.error('Checkout error:', err);
