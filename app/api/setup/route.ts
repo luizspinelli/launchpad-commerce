@@ -49,7 +49,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Aprenda React do zero ao avançado. Domine hooks, context, performance optimization e padrões do mundo real em 8 semanas.',
         price: 19999,
-        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: true,
       },
@@ -59,7 +59,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Construa APIs escaláveis com Node.js. Aprenda Express, autenticação, testes, deployment e melhores práticas.',
         price: 24999,
-        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: true,
       },
@@ -69,7 +69,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Domine TypeScript. Tipos avançados, genéricos, decoradores e padrões. Perfeito para projetos grandes.',
         price: 14999,
-        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: false,
       },
@@ -79,7 +79,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Construa aplicações Next.js production-ready. Otimização, deployment, performance e segurança.',
         price: 17999,
-        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: true,
       },
@@ -89,7 +89,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Aprenda princípios de web design, cores, tipografia, layout e UX. Inclui 50+ exemplos práticos.',
         price: 4999,
-        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'ebook',
         featured: false,
       },
@@ -99,7 +99,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Integre pagamentos com Stripe. Checkout, webhooks, billing, fraude e compliance. Código pronto para usar.',
         price: 8999,
-        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: false,
       },
@@ -109,7 +109,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Kit completo de UI com 200+ componentes prontos. Botões, cards, forms, navegação, modais e mais.',
         price: 3999,
-        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'template',
         featured: false,
       },
@@ -119,7 +119,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           '100+ componentes Tailwind prontos para copiar. Navbar, cards, forms, footers, hero sections.',
         price: 2999,
-        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1579467118454-007a50e824e2?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'template',
         featured: true,
       },
@@ -129,7 +129,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Entenda estruturas de dados, sorting, busca, recursão e otimização. +100 exercícios com soluções.',
         price: 12999,
-        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: false,
       },
@@ -139,7 +139,7 @@ async function setupDatabase(request: NextRequest) {
         description:
           'Crie animações CSS incríveis. Transitions, keyframes, performance, acessibilidade. 50+ exemplos.',
         price: 6999,
-        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop&utm_source=launchpad',
         category: 'course',
         featured: false,
       },
