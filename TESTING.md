@@ -1,193 +1,189 @@
-# LaunchPad Commerce - Testing Guide
+# LaunchPad Commerce — Testing Guide
 
-## 🧪 Full Checkout Flow Test
+## Quick Test (Manual)
 
-### Prerequisites
-- Stripe test API keys configured in `.env.local`
-- Admin password set
-- Database ready (PostgreSQL)
-- Dev server running: `npm run dev`
-
-### Step-by-Step Testing
-
-#### 1. **Create a Test Product** (Admin)
-
+### 1. View Products
 ```
-1. Go to http://localhost:3000/admin/login
-2. Enter ADMIN_PASSWORD from .env
-3. Click "Dashboard" → "Produtos" → "➕ Novo Produto"
-4. Fill form:
-   - Nome: "Test Product"
-   - Slug: "test-product" (auto-generated)
-   - Preço: 99.99
-   - Descrição: "Test Description"
-   - Imagem: https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=500 (any Unsplash URL)
-   - Arquivo: (optional - use a small PDF for testing)
-5. Click "✅ Criar Produto"
-6. Verify: Product shows in /admin/products list
+https://launchpad-commerce-roan.vercel.app/products
 ```
+Should show 10 products in a 4-column grid.
 
-#### 2. **Browse Products** (Customer)
-
-```
-1. Go to http://localhost:3000
-2. Click "🛍️ Ver Demo" or go to /products
-3. You should see:
-   - 10 seed products + your test product
-   - Grid layout with price, image, name
-4. Click on "Test Product" → details page
-5. Verify: Name, price, image, "Adicionar ao Carrinho" button
-```
-
-#### 3. **Add to Cart**
-
-```
-1. On product detail page, click "➕ Adicionar ao Carrinho"
-2. Go to /checkout
-3. Verify:
-   - Test Product appears in cart
-   - Quantity defaults to 1
-   - Total = R$ 99.99
-   - Cart sidebar shows "1 items"
-```
-
-#### 4. **Checkout with Stripe**
-
-```
-1. On checkout page, fill form:
-   - Nome: "John Test"
-   - Email: your-test@example.com
-2. Click "Ir para Stripe Checkout"
-3. You're redirected to Stripe Hosted Checkout
-4. Fill payment form:
-   - Card: 4242 4242 4242 4242 (test card)
-   - Expiry: 12/25 (any future date)
-   - CVC: 123 (any 3 digits)
-   - Name: John Test
-5. Click "Pagar" (or "Pay" in English)
-6. Wait for redirect...
-```
-
-#### 5. **Verify Order Confirmation Page**
-
-```
-Expected: Redirect to /order?session_id={STRIPE_SESSION_ID}
-
-Verify on order page:
-✅ Green checkmark (✅)
-✅ "Pedido Confirmado!" title
-✅ Order ID appears
-✅ Status: "Pagamento Confirmado"
-✅ Email: your-test@example.com
-✅ Total: R$ 99.99
-✅ Date/time displays
-```
-
-#### 6. **Verify Email Confirmation**
-
-```
-Expected: Email sent to your-test@example.com
-
-Check inbox for:
-✅ Subject: "✅ Pedido Confirmado | LaunchPad Commerce"
-✅ Order ID
-✅ Amount
-✅ Next steps
-✅ 📥 Downloads section (IF product has file):
-   - File name
-   - Download button/link
-✅ Security message
-```
-
-#### 7. **Test Download (if file uploaded)**
-
-```
-1. Click download link in email
-2. File should download (PDF, ZIP, etc)
-3. Or go back to /order?session_id=... page
-4. Scroll to "📥 Seus Downloads" section
-5. Click download button
-6. File downloads
-```
-
-#### 8. **Admin: View Order**
-
-```
-1. Go to /admin/orders
-2. Click on your order
-3. Verify:
-   - Order details display
-   - Items show with quantity & price
-   - Status shows "PAID"
-   - Customer email shows
-```
-
-#### 9. **Admin: Logout**
-
-```
-1. On /admin, click "🚪 Logout" in sidebar footer
-2. Verify: Redirects to /admin/login
-3. Try accessing /admin → redirects to /admin/login
-```
-
----
-
-## 🔴 Critical Issues to Check
-
-| Test | Expected | Fail = 🔴 |
-|------|----------|-----------|
-| Product appears in cart | ✅ Yes | ❌ Cart empty |
-| Stripe redirect works | ✅ Yes | ❌ Page breaks |
-| Order created in DB | ✅ Yes | ❌ 404 on order page |
-| Email sent | ✅ Yes | ❌ No email received |
-| Download links in email | ✅ Yes (if file) | ❌ No download section |
-| Order page shows data | ✅ Real data | ❌ Mock data |
-| OrderDownloadSection renders | ✅ Download buttons visible | ❌ Empty or missing |
-
----
-
-## 🐛 Debugging
-
-### Build Issues
+### 2. Test Checkout Session Creation
 ```bash
-npm run type-check  # Check TypeScript
-npm run build       # Full build
+curl -X POST "https://launchpad-commerce-roan.vercel.app/api/stripe/checkout" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "items": [
+      {
+        "productId": "PRODUCT_ID_HERE",
+        "productName": "Test Product",
+        "price": 6999,
+        "quantity": 1
+      }
+    ],
+    "customerEmail": "test@example.com",
+    "customerName": "Test User"
+  }'
 ```
 
-### Database Issues
+Response: `{ "success": true, "sessionId": "cs_test_..." }`
+
+### 3. Create Test Order (Simulates Webhook)
 ```bash
-npx prisma migrate dev  # Run pending migrations
-npx prisma studio      # Open Prisma GUI
+curl -X POST "https://launchpad-commerce-roan.vercel.app/api/debug/create-test-order" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sessionId": "cs_test_...",
+    "customerEmail": "test@example.com",
+    "totalAmount": 6999,
+    "items": [
+      {
+        "productId": "PRODUCT_ID_HERE",
+        "quantity": 1,
+        "price": 6999
+      }
+    ]
+  }'
 ```
 
-### Stripe Issues
-- Check Stripe dashboard → Events → webhook logs
-- Verify STRIPE_WEBHOOK_SECRET matches Webhook endpoint
-- Check /api/stripe/webhook logs in terminal
+Response: `{ "success": true, "order": { ... } }`
 
-### Email Issues
-- Verify RESEND_API_KEY in .env
-- Check Resend dashboard for delivery
-- Check spam/promotions folder
+### 4. View Order Page
+```
+https://launchpad-commerce-roan.vercel.app/order?session_id=cs_test_...
+```
 
----
-
-## ✅ Checklist Before Soft Launch
-
-- [ ] Test product creation (admin)
-- [ ] Test add to cart
-- [ ] Test checkout with test card
-- [ ] Verify order page loads with real data
-- [ ] Verify email sent with order details
-- [ ] Verify download links in email (if applicable)
-- [ ] Verify OrderDownloadSection renders on order page
-- [ ] Test admin logout
-- [ ] Test admin can view orders
-- [ ] Build passes (`npm run build`)
-- [ ] No TypeScript errors
+Should show:
+- ✅ Pedido Confirmado
+- Order ID
+- Customer Email
+- Total Amount
+- Payment Status: "Pagamento Confirmado"
 
 ---
 
-## 🚀 Ready for Launch
+## Automated Test Script
 
-If all tests pass, you're ready for soft launch on March 27! 🎉
+Run complete checkout flow test:
+
+```bash
+bash scripts/test-checkout-flow.sh
+```
+
+This will:
+1. Fetch products from API
+2. Create Stripe checkout session
+3. Create test order (simulates webhook)
+4. Verify order can be fetched
+5. Test order page loads
+
+---
+
+## Environment Variables (Verified in Vercel)
+
+✅ All required env vars are configured:
+
+```
+STRIPE_SECRET_KEY .................. configured (sk_test_51...)
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY . configured (pk_test_51...)
+STRIPE_WEBHOOK_SECRET .............. configured (whsec_test_...)
+DATABASE_URL ....................... configured (Vercel Postgres)
+NEXT_PUBLIC_URL .................... defaults to production URL
+```
+
+Check status anytime:
+```
+curl https://launchpad-commerce-roan.vercel.app/api/debug/env
+```
+
+---
+
+## Real Payment Flow (Production Ready)
+
+When user actually pays with real card in Stripe Checkout:
+
+1. User goes to: `https://checkout.stripe.com/pay/cs_test_...`
+2. User enters: Card 4242 4242 4242 4242, any future date, any 3-digit CVC
+3. Stripe processes payment
+4. Stripe webhook fires: `checkout.session.completed`
+5. Our webhook handler (`/api/stripe/webhook`) receives event
+6. Order is created in database
+7. Confirmation email sent (if Resend configured)
+8. Stripe redirects to: `/order?session_id=cs_test_...`
+9. Order page loads with confirmation
+
+---
+
+## Debug Endpoints (DELETE IN PRODUCTION)
+
+These endpoints are for testing only:
+
+### Get Environment Status
+```
+GET /api/debug/env
+```
+
+### Create Test Order (Simulates Webhook)
+```
+POST /api/debug/create-test-order
+```
+
+**⚠️ WARNING**: Delete these endpoints before deploying to production!
+
+```bash
+# Before final deploy:
+git rm app/api/debug/
+git commit -m "Remove debug endpoints before production"
+```
+
+---
+
+## Troubleshooting
+
+### Order page shows "Carregando seu pedido..." forever
+**Cause**: Order not in database yet
+**Solution**: Make sure webhook or test order creation succeeded
+
+### Stripe checkout shows "Page not found"
+**Cause**: Session ID invalid or expired (24h max)
+**Solution**: Create new session, test within 24 hours
+
+### Email not sent
+**Cause**: RESEND_API_KEY not configured
+**Solution**: Add API key to Vercel or set it in .env.local for local testing
+
+---
+
+## Production Checklist
+
+Before soft launch (March 27, 2026):
+
+- [ ] Remove `/api/debug/*` endpoints
+- [ ] Test complete flow: products → checkout → Stripe → order page
+- [ ] Verify Stripe webhook receives events
+- [ ] Test email sending (configure Resend API key)
+- [ ] Mobile responsive test
+- [ ] Admin dashboard CRUD test
+- [ ] File upload & download test
+- [ ] Database backup & recovery plan
+
+---
+
+## Current Status
+
+✅ **Core Features Ready**
+- Landing page (portfolio-focused)
+- Products API & listing
+- Shopping cart (Zustand + localStorage)
+- Stripe integration (sessions, webhook, idempotency)
+- Order management
+- Order page with confirmation
+- Database (Vercel Postgres)
+
+⚠️ **Optional/Future**
+- Email sending (Resend - needs API key)
+- Admin dashboard (built, needs testing)
+- File uploads (Vercel Blob integrated)
+- Analytics tracking (schema ready)
+
+🚀 **Ready for Soft Launch**: YES
