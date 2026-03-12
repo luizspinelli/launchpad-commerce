@@ -44,57 +44,61 @@ export default function CheckoutPage() {
           <Link href="/products" className="text-blue-600 hover:underline font-semibold">
             ← Voltar aos Produtos
           </Link>
-          <h1 className="text-4xl font-bold mt-4">Finalizar Compra</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mt-4">Finalizar Compra</h1>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Two Column Layout - Responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {/* Cart Summary - Left Column */}
-          <div className="lg:col-span-1">
-            <div className="bg-gray-50 rounded-lg p-6 sticky top-20">
-              <h2 className="text-2xl font-bold mb-4">Resumo do Pedido</h2>
+          <div className="md:col-span-1">
+            <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-20">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Resumo do Pedido</h2>
 
               {/* Items */}
-              <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
+              <div className="space-y-3 mb-6 max-h-96 overflow-y-auto">
                 {items.map((item) => (
                   <div key={item.id} className="flex justify-between text-sm">
                     <div>
-                      <p className="font-semibold">{item.name}</p>
-                      <p className="text-gray-600">Qty: {item.quantity}</p>
+                      <p className="font-semibold text-gray-900">{item.name}</p>
+                      <p className="text-gray-700">Qty: {item.quantity}</p>
                     </div>
-                    <p className="font-semibold">R$ {((item.price * item.quantity) / 100).toFixed(2)}</p>
+                    <p className="font-semibold text-gray-900">
+                      R$ {((item.price * item.quantity) / 100).toFixed(2)}
+                    </p>
                   </div>
                 ))}
               </div>
 
               {/* Divider */}
-              <div className="border-t border-gray-200 mb-4" />
+              <div className="border-t border-gray-200 my-4" />
 
-              {/* Total */}
-              <div className="mb-6">
-                <div className="flex justify-between mb-2">
-                  <span>Subtotal</span>
-                  <span>R$ {formattedTotal}</span>
+              {/* Breakdown */}
+              <div className="mb-6 space-y-2">
+                <div className="flex justify-between text-gray-700">
+                  <span className="font-medium">Subtotal</span>
+                  <span className="text-gray-900 font-medium">R$ {formattedTotal}</span>
                 </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>Frete</span>
-                  <span>Grátis</span>
+                <div className="flex justify-between text-gray-700">
+                  <span className="font-medium">Frete</span>
+                  <span className="text-green-600 font-semibold">Grátis</span>
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="border-t border-gray-200 mb-4" />
+              <div className="border-t border-gray-300 my-4" />
 
               {/* Grand Total */}
-              <div className="flex justify-between text-xl font-bold">
-                <span>Total</span>
-                <span>R$ {formattedTotal}</span>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700 font-semibold">Total</span>
+                <span className="text-2xl font-bold text-gray-900">
+                  R$ {formattedTotal}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Checkout Form - Right Column */}
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2">
             <CheckoutForm
               items={items}
               total={total}

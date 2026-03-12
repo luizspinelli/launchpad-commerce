@@ -148,7 +148,7 @@ export default function CheckoutForm({
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-gray-200 p-6">
-      <h2 className="text-2xl font-bold mb-6">Informações de Pagamento</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Informações de Pagamento</h2>
 
       {/* Error Message */}
       {error && (
@@ -169,8 +169,12 @@ export default function CheckoutForm({
           value={formData.name}
           onChange={handleChange}
           disabled={isProcessing}
-          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 disabled:bg-gray-100 ${
-            fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+            isProcessing
+              ? 'bg-gray-100 text-gray-600 cursor-not-allowed border-gray-300'
+              : fieldErrors.name
+                ? 'border-red-500 focus:ring-red-500 bg-white'
+                : 'border-gray-300 focus:ring-blue-500 bg-white text-gray-900'
           }`}
           placeholder="João Silva"
         />
@@ -189,18 +193,22 @@ export default function CheckoutForm({
           value={formData.email}
           onChange={handleChange}
           disabled={isProcessing}
-          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 disabled:bg-gray-100 ${
-            fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+            isProcessing
+              ? 'bg-gray-100 text-gray-600 cursor-not-allowed border-gray-300'
+              : fieldErrors.email
+                ? 'border-red-500 focus:ring-red-500 bg-white'
+                : 'border-gray-300 focus:ring-blue-500 bg-white text-gray-900'
           }`}
           placeholder="seu.email@example.com"
         />
         {fieldErrors.email && <p className="text-red-600 text-sm mt-1">{fieldErrors.email}</p>}
       </div>
 
-      {/* Stripe Info */}
-      <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <p className="text-sm text-blue-900">
-          🔒 Você será redirecionado para o checkout seguro do Stripe para completar o pagamento.
+      {/* Stripe Redirect Warning */}
+      <div className="mb-6 bg-blue-50 border-l-4 border-blue-600 rounded-lg p-4">
+        <p className="text-sm text-blue-900 font-medium">
+          🔒 <strong>Redirecionamento Seguro:</strong> Você será levado para o checkout seguro do Stripe, certificado e protegido.
         </p>
       </div>
 
@@ -208,19 +216,28 @@ export default function CheckoutForm({
       <button
         type="submit"
         disabled={isProcessing}
-        className={`w-full py-3 px-4 rounded-lg font-bold text-lg text-white transition-colors ${
+        className={`w-full py-3 px-4 rounded-lg font-bold text-lg text-white transition-all duration-200 ${
           isProcessing
-            ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
+            ? 'bg-gray-400 cursor-not-allowed opacity-75'
+            : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 shadow-md hover:shadow-lg'
         }`}
       >
-        {isProcessing ? '⏳ Processando...' : 'Ir para Stripe Checkout'}
+        {isProcessing ? (
+          <>
+            <span className="inline-block animate-spin mr-2">⏳</span>
+            Processando...
+          </>
+        ) : (
+          '💳 Ir para Stripe Checkout'
+        )}
       </button>
 
       {/* Security Info */}
-      <p className="text-center text-xs text-gray-500 mt-4">
-        🔒 Seu pagamento é 100% seguro e processado por Stripe
-      </p>
+      <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+        <p className="text-center text-xs text-green-800 font-medium">
+          ✅ Seu pagamento é <strong>100% seguro</strong> e processado por Stripe
+        </p>
+      </div>
     </form>
   );
 }
